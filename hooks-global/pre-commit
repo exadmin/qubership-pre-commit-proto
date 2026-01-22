@@ -36,6 +36,7 @@ if [ -z "$SKIP_PULL" ]; then
     # todo: support case when network service is not available
     if git -C "$GLOBAL_HOOKS_PATH" pull; then
         echo -e "${PREFIX} Global hooks updated successfully"
+        echo "$CURRENT_TIME" > "$TIMESTAMP_FILE"
     else
         echo -e "${PREFIX} Warning: Failed to update global hooks"
     fi
