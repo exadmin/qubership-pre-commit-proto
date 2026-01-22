@@ -12,7 +12,8 @@ The logic of solution is following:
 
 # How to install
 ## Prerequisites
-Git is installed from https://git-scm.com/install/
+### Git
+Git to be installed from https://git-scm.com/install/
 No Git global hook paths are setup yet, check "core.hooksPath" property value with
 ```shell
 git config --global core.hooksPath
@@ -20,10 +21,44 @@ git config --global core.hooksPath
 git config --global --list
 ```
 
+### Python
+Python to be installed from https://www.python.org/downloads/, currently tested version is 3.14.2.
+Solution is based on using [pre-commit framework](https://pre-commit.com/) which is python-based.
+
+### Pre-commit
+Pre-commit framework to be installed from using instructions from https://pre-commit.com/
+```shell
+pip install pre-commit
+```
+
+After installation check pre-commit version by
+```shell
+pre-commit --version
+```
+Currently tested with 4.5.1
+
+
 ## Install global hooks
 Note, that downloaded repository will be registered in the Git global configuration, 
 so pay attention it should be quite static folder, i.e. if moved/renamed - then configuration must be reset.
 
+
+### Windows
+Navigate to the folder where new subfolder will be created by git clone, then run following script
+```shell
+REM set name of the folder to download repository into
+set FOLDER_NAME=git-global-hooks
+
+REM do repository cloning
+git clone https://github.com/exadmin/qubership-pre-commit-proto.git "%FOLDER_NAME%"
+
+REM Setup global path to hooks
+cd "%FOLDER_NAME%"
+git config --global core.hooksPath "%cd%\hooks-global"
+```
+
+### Linux
+Navigate to the folder where new subfolder will be created by git clone, then run following script
 ```shell
 # set name of the folder to download repository into
 FOLDER_NAME=git-global-hooks
@@ -33,10 +68,25 @@ git clone https://github.com/exadmin/qubership-pre-commit-proto.git "$FOLDER_NAM
 
 # Setup global path to hooks
 cd "$FOLDER_NAME"
+
+# Linux variant
 git config --global core.hooksPath "$(pwd)/hooks-global"
 ```
 
-## Uninstall
+Check that property is set correctly
+```shell
+git config --global core.hooksPath
+```
+
+Now, each time you are doing
+```shell
+git commit -m "Commit description"
+```
+a Global Hooks will be called with mentioned logic as described at the beginning of README.md file.
+
+
+
+## Uninstall or disable
 Just unset Git global property to hooks
 ```shell
 git config --global --unset core.hooksPath

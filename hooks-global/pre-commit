@@ -35,9 +35,9 @@ fi
 if [ -z "$SKIP_PULL" ]; then
     # todo: support case when network service is not available
     if git -C "$GLOBAL_HOOKS_PATH" pull; then
-        echo "${PREFIX} Global hooks updated successfully"
+        echo -e "${PREFIX} Global hooks updated successfully"
     else
-        echo "${PREFIX} Warning: Failed to update global hooks"
+        echo -e "${PREFIX} Warning: Failed to update global hooks"
     fi
 fi
 
